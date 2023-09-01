@@ -4,6 +4,8 @@
  */
 package car.rental.system;
 
+import car.rental.system.view.LayoutView;
+
 /**
  *
  * @author Damith
@@ -15,6 +17,7 @@ public class CarRentalSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+         new LayoutView().setVisible(true);
     }
     
 }
