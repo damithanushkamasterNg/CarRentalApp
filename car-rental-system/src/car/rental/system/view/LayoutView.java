@@ -177,11 +177,11 @@ public class LayoutView extends javax.swing.JFrame {
     }//GEN-LAST:event_manageCustomnerButtonActionPerformed
 
     private void manageCarsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCarsButtonActionPerformed
-
+        loadCarPanel();
     }//GEN-LAST:event_manageCarsButtonActionPerformed
 
     private void manageRentsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageRentsButtonActionPerformed
-
+        loadManageRentPanel();
     }//GEN-LAST:event_manageRentsButtonActionPerformed
 
     private void manageCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCategoryButtonActionPerformed
@@ -243,4 +243,23 @@ public class LayoutView extends javax.swing.JFrame {
         bodyPanel.repaint();
         bodyPanel.revalidate();
     }
+
+    private void loadCarPanel() {
+        bodyPanel.removeAll();
+        CarPanel carPanel = new CarPanel();
+        carPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
+        bodyPanel.add(carPanel);
+        bodyPanel.repaint();
+        bodyPanel.revalidate();
+    }
+
+    private void loadManageRentPanel() {
+        bodyPanel.removeAll();
+        RentCarPanel rentCarPanel = new RentCarPanel();
+        rentCarPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
+        bodyPanel.add(rentCarPanel);
+        bodyPanel.repaint();
+        bodyPanel.revalidate();
+    }
+
 }

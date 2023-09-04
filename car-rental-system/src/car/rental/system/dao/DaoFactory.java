@@ -1,5 +1,7 @@
 package car.rental.system.dao;
+import car.rental.system.dao.custom.impl.CarDaoImpl;
 import car.rental.system.dao.custom.impl.CustomerDaoImpl;
+import car.rental.system.dao.custom.impl.RentDaoImpl;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -35,10 +37,10 @@ public class DaoFactory {
         switch (type) {
             case CUSTOMER:
                 return new CustomerDaoImpl();
-            case ITEM:
-//                return new ItemDaoImpl();
-            case ORDER:
-//                return new OrderDaoImpl();
+            case CAR:
+                return new CarDaoImpl();
+            case RENT:
+                return new RentDaoImpl();
             case ORDER_DETAIL:
 //                return new OrderDetailDaoImpl();
             default:
@@ -47,6 +49,6 @@ public class DaoFactory {
     }
 
     public enum DaoTypes {
-        CUSTOMER, ITEM, ORDER, ORDER_DETAIL
+        CUSTOMER, CAR, RENT, ORDER_DETAIL
     }
 }

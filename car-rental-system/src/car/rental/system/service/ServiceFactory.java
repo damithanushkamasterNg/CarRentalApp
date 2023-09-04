@@ -1,5 +1,7 @@
 package car.rental.system.service;
+import car.rental.system.service.custom.impl.CarServiceImpl;
 import car.rental.system.service.custom.impl.CustomerServiceImpl;
+import car.rental.system.service.custom.impl.RentServiceImpl;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -28,16 +30,16 @@ public class ServiceFactory {
         switch (type) {
             case CUSTOMER:
                 return  new CustomerServiceImpl();
-//            case ITEM:
-//                return new ItemServiceImpl();
-//            case ORDER:
-//                return new OrderServiceImpl();
+            case CAR:
+                return new CarServiceImpl();
+            case RENT:
+                return new RentServiceImpl();
             default:
                 return null;
         }
     }
     
     public enum ServiceType{
-        CUSTOMER, ITEM, ORDER
+        CUSTOMER, CAR, RENT
     }
 }
