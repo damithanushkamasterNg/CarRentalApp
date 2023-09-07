@@ -185,7 +185,7 @@ public class LayoutView extends javax.swing.JFrame {
     }//GEN-LAST:event_manageRentsButtonActionPerformed
 
     private void manageCategoryButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageCategoryButtonActionPerformed
-        // TODO add your handling code here:
+        loadCategoryPanel();
     }//GEN-LAST:event_manageCategoryButtonActionPerformed
 
     /**
@@ -258,6 +258,15 @@ public class LayoutView extends javax.swing.JFrame {
         RentCarPanel rentCarPanel = new RentCarPanel();
         rentCarPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
         bodyPanel.add(rentCarPanel);
+        bodyPanel.repaint();
+        bodyPanel.revalidate();
+    }
+
+    private void loadCategoryPanel() {
+        bodyPanel.removeAll();
+        CategoryPanel categoryPanel = new CategoryPanel();
+        categoryPanel.setSize(bodyPanel.getWidth(), bodyPanel.getHeight());
+        bodyPanel.add(categoryPanel);
         bodyPanel.repaint();
         bodyPanel.revalidate();
     }

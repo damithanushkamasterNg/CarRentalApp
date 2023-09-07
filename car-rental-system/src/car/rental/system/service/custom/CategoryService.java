@@ -20,7 +20,7 @@ public interface CategoryService extends SuperService{
 
     String addCategory(CategoryDto categoryDto) throws Exception;
 
-    CategoryDto getCategory(int categoryId) throws Exception;
+    CategoryDto getCategory(String categoryId) throws Exception;
 
-    String deleteCategory(int categoryId) throws Exception;
+    String deleteCategory(String categoryId) throws Exception;
 }

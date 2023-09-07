@@ -29,11 +29,11 @@ public class CategoryController {
         return categoryService.addCategory(categoryDto);
     }
 
-    public CategoryDto getCategory(int categoryId) throws Exception {
+    public CategoryDto getCategory(String categoryId) throws Exception {
         return categoryService.getCategory(categoryId);
     }
 
-    public String deleteCategory(int categoryId) throws Exception {
+    public String deleteCategory(String categoryId) throws Exception {
         return categoryService.deleteCategory(categoryId);
     }
 }
