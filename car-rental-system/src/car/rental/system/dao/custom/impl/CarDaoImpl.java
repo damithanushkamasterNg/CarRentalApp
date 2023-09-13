@@ -42,6 +42,7 @@ public class CarDaoImpl implements CarDao {
 
         while (rst.next()) {
             CarEntity carEntity = new CarEntity(
+                    rst.getInt("id"),
                     rst.getString("brand"),
                     rst.getString("model"),
                     rst.getString("vehicle_no"),

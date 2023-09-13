@@ -4,6 +4,8 @@
  */
 package car.rental.system.entity;
 
+import java.util.Date;
+
 /**
  *
  * @author Damith
@@ -11,8 +13,8 @@ package car.rental.system.entity;
 public class RentEntity {
 
     private int id;
-    private String fromDate;
-    private String toDate;
+    private Date fromDate;
+    private Date toDate;
     private double total;
     private boolean isReturn;
     private double balance;
@@ -25,7 +27,7 @@ public class RentEntity {
     public RentEntity() {
     }
 
-    public RentEntity(int id, String fromDate, String toDate, double total, boolean isReturn, double balance, double refundableDeposit, double advancedPayment, double perDayRent, int carId, int customerId) {
+    public RentEntity(int id, String Date, Date toDate, double total, boolean isReturn, double balance, double refundableDeposit, double advancedPayment, double perDayRent, int carId, int customerId) {
         this.id = id;
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -38,6 +40,21 @@ public class RentEntity {
         this.carId = carId;
         this.customerId = customerId;
     }
+
+    public RentEntity(Date fromDate, Date toDate, double total, boolean isReturn, double balance, double refundableDeposit, double advancedPayment, double perDayRent, int carId, int customerId) {
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.total = total;
+        this.isReturn = isReturn;
+        this.balance = balance;
+        this.refundableDeposit = refundableDeposit;
+        this.advancedPayment = advancedPayment;
+        this.perDayRent = perDayRent;
+        this.carId = carId;
+        this.customerId = customerId;
+    }
+    
+    
 
     /**
      * @return the id
@@ -56,28 +73,28 @@ public class RentEntity {
     /**
      * @return the fromDate
      */
-    public String getFromDate() {
+    public Date getFromDate() {
         return fromDate;
     }
 
     /**
      * @param fromDate the fromDate to set
      */
-    public void setFromDate(String fromDate) {
+    public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 
     /**
      * @return the toDate
      */
-    public String getToDate() {
+    public Date getToDate() {
         return toDate;
     }
 
     /**
      * @param toDate the toDate to set
      */
-    public void setToDate(String toDate) {
+    public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
 

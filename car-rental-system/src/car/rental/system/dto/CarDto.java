@@ -9,6 +9,8 @@ package car.rental.system.dto;
  * @author Damith
  */
 public class CarDto {
+
+    private int id;
     private String brand;
     private String model;
     private String vehicleNo;
@@ -20,7 +22,8 @@ public class CarDto {
         // Default constructor
     }
 
-    public CarDto(String brand, String model, String vehicleNo, String categoryId, double pricePerDay, int year) {
+    public CarDto(int id, String brand, String model, String vehicleNo, String categoryId, double pricePerDay, int year) {
+        this.id = id;
         this.brand = brand;
         this.model = model;
         this.vehicleNo = vehicleNo;
@@ -29,8 +32,26 @@ public class CarDto {
         this.year = year;
     }
 
-    // Getter and Setter methods for all fields
+    public CarDto(String brand, String model, String vehicleNo, String categoryId, double pricePerDay, int year) {
+        this.brand = brand;
+        this.model = model;
+        this.vehicleNo = vehicleNo;
+        this.categoryId = categoryId;
+        this.pricePerDay = pricePerDay;
+        this.year = year;
+    }
+    
+    
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    // Getter and Setter methods for all fields
     public String getBrand() {
         return brand;
     }
@@ -81,13 +102,7 @@ public class CarDto {
 
     @Override
     public String toString() {
-        return "CarDto{" +
-                "brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", vehicleNo='" + vehicleNo + '\'' +
-                ", categoryId='" + categoryId + '\'' +
-                ", pricePerDay=" + pricePerDay +
-                ", year=" + year +
-                '}';
+        return "CarDto{" + "id=" + id + ", brand=" + brand + ", model=" + model + ", vehicleNo=" + vehicleNo + ", categoryId=" + categoryId + ", pricePerDay=" + pricePerDay + ", year=" + year + '}';
     }
+
 }

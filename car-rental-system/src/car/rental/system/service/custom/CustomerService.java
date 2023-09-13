@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public interface CustomerService extends SuperService {
     
-    ArrayList<CustomerDto> getAllCustomer() throws Exception;
+    ArrayList<CustomerDto> getAllCustomers() throws Exception;
 
     public String updateCustomer(CustomerDto customerDto) throws Exception;
 
@@ -23,4 +23,5 @@ public interface CustomerService extends SuperService {
     public CustomerDto getCustomer(String nic) throws Exception;
 
     public String deleteCustomer(String nic) throws Exception;
+
 }

@@ -18,7 +18,7 @@ public class CustomerController {
     CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CUSTOMER);
 
     public ArrayList<CustomerDto> getAllCustomers() throws Exception {
-        return customerService.getAllCustomer();
+        return customerService.getAllCustomers();
     }
 
     public String updateCustomer(CustomerDto customerDto) throws Exception {

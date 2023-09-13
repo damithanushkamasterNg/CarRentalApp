@@ -4,14 +4,17 @@
  */
 package car.rental.system.dto;
 
+import java.util.Date;
+
 /**
  *
  * @author Damith
  */
 public class RentDto {
 
-    private String fromDate;
-    private String toDate;
+    private int id;
+    private Date fromDate;
+    private Date toDate;
     private double total;
     private boolean isReturn;
     private double balance;
@@ -24,7 +27,8 @@ public class RentDto {
     public RentDto() {
     }
 
-    public RentDto(String fromDate, String toDate, double total, boolean isReturn, double balance, double refundableDeposit, double advancedPayment, double perDayRent, int carId, int customerId) {
+    public RentDto(int id, Date fromDate, Date toDate, double total, boolean isReturn, double balance, double refundableDeposit, double advancedPayment, double perDayRent, int carId, int customerId) {
+        this.id = id;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.total = total;
@@ -37,31 +41,32 @@ public class RentDto {
         this.customerId = customerId;
     }
 
+ 
     /**
      * @return the fromDate
      */
-    public String getFromDate() {
+    public Date getFromDate() {
         return fromDate;
     }
 
     /**
      * @param fromDate the fromDate to set
      */
-    public void setFromDate(String fromDate) {
+    public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
     }
 
     /**
      * @return the toDate
      */
-    public String getToDate() {
+    public Date getToDate() {
         return toDate;
     }
 
     /**
      * @param toDate the toDate to set
      */
-    public void setToDate(String toDate) {
+    public void setToDate(Date toDate) {
         this.toDate = toDate;
     }
 
@@ -177,9 +182,18 @@ public class RentDto {
         this.customerId = customerId;
     }
 
-    @Override
-    public String toString() {
-        return "RentDto{" + "fromDate=" + fromDate + ", toDate=" + toDate + ", total=" + total + ", isReturn=" + isReturn + ", balance=" + balance + ", refundableDeposit=" + refundableDeposit + ", advancedPayment=" + advancedPayment + ", perDayRent=" + perDayRent + ", carId=" + carId + ", customerId=" + customerId + '}';
+    public int getId() {
+        return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "RentDto{" + "id=" + id + ", fromDate=" + fromDate + ", toDate=" + toDate + ", total=" + total + ", isReturn=" + isReturn + ", balance=" + balance + ", refundableDeposit=" + refundableDeposit + ", advancedPayment=" + advancedPayment + ", perDayRent=" + perDayRent + ", carId=" + carId + ", customerId=" + customerId + '}';
+    }
+
+ 
 }

@@ -20,7 +20,7 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerDao customerDao = (CustomerDao) DaoFactory.getInstance().getDao(DaoFactory.DaoTypes.CUSTOMER);
 
     @Override
-    public ArrayList<CustomerDto> getAllCustomer() throws Exception {
+    public ArrayList<CustomerDto> getAllCustomers() throws Exception {
         ArrayList<CustomerDto> customerDtos = new ArrayList<>();
         ArrayList<CustomerEntity> customerEntitys = customerDao.getAll();
 
@@ -60,7 +60,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public CustomerDto getCustomer(String nic) throws Exception {
         CustomerEntity entity = customerDao.get(nic);
-        return new CustomerDto(entity.getName(), entity.getNic(),
+        return new CustomerDto(entity.getId(),entity.getName(), entity.getNic(),
                 entity.getAddress(), entity.getPhone());
     }
 

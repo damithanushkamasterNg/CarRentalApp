@@ -65,7 +65,7 @@ public class CarServiceImpl implements CarService {
         CarEntity carEntity = carDao.get(vehicleNo);
 
         if (carEntity != null) {
-            return new CarDto(carEntity.getBrand(), carEntity.getModel(),
+            return new CarDto(carEntity.getId(), carEntity.getBrand(), carEntity.getModel(),
                     carEntity.getVehicleNo(), carEntity.getCategoryId(),
                     carEntity.getPricePerDay(), carEntity.getYear());
         } else {

@@ -10,10 +10,24 @@ package car.rental.system.dto;
  */
 public class CustomerDto {
 
+    private int id;
     private String name;
     private String nic;
     private String address;
     private String phone;
+
+    public CustomerDto() {
+    }
+    
+
+
+    public CustomerDto(int id, String name, String nic, String address, String phone) {
+        this.id = id;
+        this.name = name;
+        this.nic = nic;
+        this.address = address;
+        this.phone = phone;
+    }
 
     public CustomerDto(String name, String nic, String address, String phone) {
         this.name = name;
@@ -21,7 +35,18 @@ public class CustomerDto {
         this.address = address;
         this.phone = phone;
     }
+    
+    
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+   
     // Getter and setter methods for each field
     public String getName() {
         return name;
@@ -55,14 +80,10 @@ public class CustomerDto {
         this.phone = phone;
     }
 
-    // Other methods as needed
     @Override
     public String toString() {
-        return "CustomerDto{"
-                + "name='" + name + '\''
-                + ", nic='" + nic + '\''
-                + ", address='" + address + '\''
-                + ", phone='" + phone + '\''
-                + '}';
+        return "CustomerDto{" + "id=" + id + ", name=" + name + ", nic=" + nic + ", address=" + address + ", phone=" + phone + '}';
     }
+
+   
 }

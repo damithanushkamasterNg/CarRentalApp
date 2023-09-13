@@ -10,7 +10,7 @@ package car.rental.system.entity;
  */
 public class CarEntity {
 
-    private Long id; // An auto-generated unique identifier for the car
+    private int id; // An auto-generated unique identifier for the car
 
     private String brand;
     private String model;
@@ -32,12 +32,24 @@ public class CarEntity {
         this.year = year;
     }
 
+    public CarEntity(int id, String brand, String model, String vehicleNo, String categoryId, double pricePerDay, int year) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.vehicleNo = vehicleNo;
+        this.categoryId = categoryId;
+        this.pricePerDay = pricePerDay;
+        this.year = year;
+    }
+    
+    
+
     // Getter and Setter methods for all fields
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

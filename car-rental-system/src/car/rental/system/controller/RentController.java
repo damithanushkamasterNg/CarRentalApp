@@ -4,8 +4,12 @@
  */
 package car.rental.system.controller;
 
+import car.rental.system.dto.CarDto;
+import car.rental.system.dto.CustomerDto;
 import car.rental.system.dto.RentDto;
 import car.rental.system.service.ServiceFactory;
+import car.rental.system.service.custom.CarService;
+import car.rental.system.service.custom.CustomerService;
 import car.rental.system.service.custom.RentService;
 import java.util.ArrayList;
 
@@ -27,5 +31,17 @@ public class RentController {
 
     public ArrayList<RentDto> getRentalHistory(int customerId) throws Exception {
         return rentService.getRentalHistory(customerId);
+    }
+    
+      // Load customer list for dropdown
+    public ArrayList<CustomerDto> getCustomerList() throws Exception {
+        CustomerService customerService = (CustomerService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CUSTOMER);
+        return customerService.getAllCustomers(); // Implement this method in CustomerService
+    }
+
+    // Load car list for dropdown
+    public ArrayList<CarDto> getCarList() throws Exception {
+        CarService carService = (CarService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CAR);
+        return carService.getAllCars(); // Implement this method in CarService
     }
 }

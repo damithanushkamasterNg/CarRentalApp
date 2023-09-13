@@ -40,6 +40,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
         while (rst.next()) {
             CustomerEntity customerEntity = new CustomerEntity(
+                    rst.getInt(1),
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4),
