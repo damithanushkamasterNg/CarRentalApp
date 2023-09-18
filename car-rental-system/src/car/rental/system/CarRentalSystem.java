@@ -5,6 +5,7 @@
 package car.rental.system;
 
 import car.rental.system.view.LayoutView;
+import car.rental.system.view.LoginForm;
 
 /**
  *
@@ -17,7 +18,7 @@ public class CarRentalSystem {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-         new LayoutView().setVisible(true);
+         new LoginForm().setVisible(true);
     }
     
 }
