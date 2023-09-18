@@ -11,16 +11,12 @@ import car.rental.system.dto.CarDto;
 import car.rental.system.dto.CustomerDto;
 import car.rental.system.dto.CustomerDtoRenderer;
 import car.rental.system.dto.RentDto;
-import car.rental.system.service.ServiceFactory;
-import car.rental.system.service.custom.CarService;
-import car.rental.system.service.custom.CustomerService;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -107,7 +103,7 @@ public class RentCarPanel extends javax.swing.JPanel {
         rentPerDayRentLabel = new javax.swing.JLabel();
         tablePanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        carDetailTable = new javax.swing.JTable();
+        rentDetailTable = new javax.swing.JTable();
         rentCarButton = new javax.swing.JButton();
         searchRent = new javax.swing.JButton();
         returnCarButton1 = new javax.swing.JButton();
@@ -237,7 +233,7 @@ public class RentCarPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        carDetailTable.setModel(new javax.swing.table.DefaultTableModel(
+        rentDetailTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -248,12 +244,15 @@ public class RentCarPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        carDetailTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        rentDetailTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                carDetailTableMouseClicked(evt);
+                rentDetailTableMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                rentDetailTableMouseEntered(evt);
             }
         });
-        jScrollPane1.setViewportView(carDetailTable);
+        jScrollPane1.setViewportView(rentDetailTable);
 
         rentCarButton.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         rentCarButton.setLabel("Rent Car");
@@ -265,7 +264,6 @@ public class RentCarPanel extends javax.swing.JPanel {
 
         searchRent.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         searchRent.setText("Search");
-        searchRent.setActionCommand("Search");
         searchRent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchRentActionPerformed(evt);
@@ -292,30 +290,24 @@ public class RentCarPanel extends javax.swing.JPanel {
                     .addGroup(tablePanelLayout.createSequentialGroup()
                         .addGap(149, 149, 149)
                         .addComponent(searchRent, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(returnCarButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(rentCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePanelLayout.createSequentialGroup()
-                    .addContainerGap(312, Short.MAX_VALUE)
-                    .addComponent(returnCarButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(162, 162, 162)))
         );
         tablePanelLayout.setVerticalGroup(
             tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rentCarButton)
+                    .addGroup(tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rentCarButton)
+                        .addComponent(returnCarButton1))
                     .addComponent(searchRent, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(67, Short.MAX_VALUE))
-            .addGroup(tablePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(tablePanelLayout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(returnCarButton1)
-                    .addContainerGap(219, Short.MAX_VALUE)))
         );
 
         searchRent.getAccessibleContext().setAccessibleName("Search Rent");
@@ -330,6 +322,11 @@ public class RentCarPanel extends javax.swing.JPanel {
         customerLabel.setText("Customer");
 
         customerSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        customerSelection.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                customerSelectionItemStateChanged(evt);
+            }
+        });
         customerSelection.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 customerSelectionActionPerformed(evt);
@@ -404,12 +401,12 @@ public class RentCarPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_rentCarButtonActionPerformed
 
     private void searchRentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchRentActionPerformed
-       loadAllRentedCars();
+        loadAllRentedCars();
     }//GEN-LAST:event_searchRentActionPerformed
 
-    private void carDetailTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_carDetailTableMouseClicked
+    private void rentDetailTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rentDetailTableMouseClicked
 //        searchCar();
-    }//GEN-LAST:event_carDetailTableMouseClicked
+    }//GEN-LAST:event_rentDetailTableMouseClicked
 
     private void totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalActionPerformed
         // TODO add your handling code here:
@@ -427,12 +424,24 @@ public class RentCarPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_returnCarButton1ActionPerformed
 
+    private void customerSelectionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_customerSelectionItemStateChanged
+        String customerNic = customerSelection.getSelectedItem().toString();
+        try {
+            selectedCustomer = customerController.getCustomer(customerNic);
+        } catch (Exception ex) {
+            Logger.getLogger(RentCarPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_customerSelectionItemStateChanged
+
+    private void rentDetailTableMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rentDetailTableMouseEntered
+        searchRent();
+    }//GEN-LAST:event_rentDetailTableMouseEntered
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField advancedPayment;
     private javax.swing.JTextField balance;
     private javax.swing.JPanel basePanel;
-    private javax.swing.JTable carDetailTable;
     private javax.swing.JLabel carLabel;
     private javax.swing.JComboBox<String> carSelection;
     private javax.swing.JLabel customerLabel;
@@ -447,6 +456,7 @@ public class RentCarPanel extends javax.swing.JPanel {
     private javax.swing.JLabel rentAdvancedPaymentLabel;
     private javax.swing.JLabel rentBalance;
     private javax.swing.JButton rentCarButton;
+    private javax.swing.JTable rentDetailTable;
     private javax.swing.JLabel rentFromDate;
     private javax.swing.JLabel rentPerDayRentLabel;
     private javax.swing.JLabel rentRefundableDepositLabel;
@@ -505,7 +515,7 @@ public class RentCarPanel extends javax.swing.JPanel {
 
     private void returnCar() {
         try {
-            int selectedRowIndex = carDetailTable.getSelectedRow();
+            int selectedRowIndex = rentDetailTable.getSelectedRow();
             if (selectedRowIndex != -1) {
                 RentDto selectedRent = getRentFromTable(selectedRowIndex); // Implement this method
                 String result = rentController.returnCar(selectedRent.getId(), Double.parseDouble(balance.getText()));
@@ -521,39 +531,39 @@ public class RentCarPanel extends javax.swing.JPanel {
         }
     }
 
-private void loadAllRentedCars() {
-    try {
-        int customerId = selectedCustomer.getId();
-        
-        // Fetch all rented cars from your database using rentController or a dedicated service method
-        ArrayList<RentDto> rentedCars = rentController.getRentalHistory(customerId); // Provide the customer ID
-        
-        // Create the table model for your carDetailTable
-        String[] columnNames = {"From Date", "To Date"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");  
-        for (RentDto rentedCar : rentedCars) {
-            
-            // Assuming you have appropriate getters in RentDto to retrieve required data
-            int rentalId = rentedCar.getId();
-            String fromDate = formatter.format(rentedCar.getFromDate());
-            String toDate = formatter.format(rentedCar.getToDate());
-            
-            // Create an array of Object to represent a row of data
-            Object[] rowData = {fromDate, toDate};
-            
-            // Add the row data to the table model
-            model.addRow(rowData);
-        }
-        
-        // Set the table model for carDetailTable
-        carDetailTable.setModel(model);
-    } catch (Exception ex) {
-        Logger.getLogger(RentCarPanel.class.getName()).log(Level.SEVERE, null, ex);
-        JOptionPane.showMessageDialog(this, ex.getMessage());
-    }
-}
+    private void loadAllRentedCars() {
+        try {
 
+            // Fetch all rented cars from your database using rentController or a dedicated service method
+            ArrayList<RentDto> rentedCars = rentController.getRentalHistory(selectedCustomer.getId()); // Provide the customer nic
+            System.out.println(rentedCars);
+            // Create the table model for your carDetailTable
+            String[] columnNames = {"Rent ID", "From Date", "To Date", "Advanced Payment", "Per Day Rent"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+            for (RentDto rentedCar : rentedCars) {
+
+                // Assuming you have appropriate getters in RentDto to retrieve required data
+                int rentalId = rentedCar.getId();
+                String fromDate = formatter.format(rentedCar.getFromDate());
+                String toDate = formatter.format(rentedCar.getToDate());
+                String advancedPayment = Double.toString(rentedCar.getAdvancedPayment());
+                String perDayRent = Double.toString(rentedCar.getPerDayRent());
+
+                // Create an array of Object to represent a row of data
+                Object[] rowData = {rentalId, fromDate, toDate, advancedPayment, perDayRent};
+
+                // Add the row data to the table model
+                model.addRow(rowData);
+            }
+
+            // Set the table model for carDetailTable
+            rentDetailTable.setModel(model);
+        } catch (Exception ex) {
+            Logger.getLogger(RentCarPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+    }
 
 // Helper method to clear rent-related input fields
     private void clearRentFields() {
@@ -575,10 +585,27 @@ private void loadAllRentedCars() {
         return null;
     }
 
-// Implement a method to populate the carDetailTable with rented cars data
-    private void populateCarDetailTable(ArrayList<RentDto> rentedCars) {
-        // Populate your carDetailTable based on the rentedCars data
-        // You need to implement this method based on your table structure
-        // and how you display rented cars in the table
+    private void searchRent() {
+        try {
+            String rentId = rentDetailTable.getValueAt(rentDetailTable.getSelectedRow(), 1).toString();
+            RentDto rentDto = rentController.getRentDetail(Integer.parseInt(rentId));
+            SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM yyyy");
+            if (rentDto != null) {
+                String fromDate1 = formatter.format(rentDto.getFromDate());
+                String toDate1 = formatter.format(rentDto.getToDate());
+                fromDate.setText(fromDate1);
+                toDate.setText(toDate1);
+                advancedPayment.setText(Double.toString(rentDto.getAdvancedPayment()));
+                refundableDeposit.setText(Double.toString(rentDto.getRefundableDeposit()));
+                perDayRent.setText(Double.toString(rentDto.getPerDayRent()));
+                balance.setText(Double.toString(rentDto.getBalance()));
+            } else {
+                JOptionPane.showMessageDialog(this, "Rent Not Found");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
     }
 }

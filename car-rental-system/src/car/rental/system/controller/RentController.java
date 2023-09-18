@@ -29,8 +29,8 @@ public class RentController {
         return rentService.returnCar(rentId, finalBalance);
     }
 
-    public ArrayList<RentDto> getRentalHistory(int customerId) throws Exception {
-        return rentService.getRentalHistory(customerId);
+    public ArrayList<RentDto> getRentalHistory(int id) throws Exception {
+        return rentService.getRentalHistory(id);
     }
     
       // Load customer list for dropdown
@@ -43,5 +43,9 @@ public class RentController {
     public ArrayList<CarDto> getCarList() throws Exception {
         CarService carService = (CarService) ServiceFactory.getInstance().getService(ServiceFactory.ServiceType.CAR);
         return carService.getAllCars(); // Implement this method in CarService
+    }
+    
+      public RentDto getRentDetail(int rentId) throws Exception  {
+        return rentService.getRentDetail(rentId);
     }
 }

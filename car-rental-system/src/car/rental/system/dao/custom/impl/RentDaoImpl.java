@@ -6,8 +6,6 @@ package car.rental.system.dao.custom.impl;
 
 import car.rental.system.dao.CrudUtil;
 import car.rental.system.dao.custom.RentDao;
-import car.rental.system.dto.CarDto;
-import car.rental.system.dto.CustomerDto;
 import car.rental.system.entity.RentEntity;
 import java.util.ArrayList;
 import java.sql.ResultSet;
@@ -20,18 +18,27 @@ public class RentDaoImpl implements RentDao {
 
     @Override
     public ArrayList<RentEntity> getRentalHistory(int customerId) throws Exception {
-        // Implement the logic to retrieve rental history for a customer by customerId
-        // Use the CrudUtil class to execute SQL queries
-
-        // Sample code:
+        System.out.println(customerId);
         ArrayList<RentEntity> rentalHistory = new ArrayList<>();
         ResultSet resultSet = CrudUtil.executeQuery("SELECT * FROM rent WHERE customer_id = ?", customerId);
+
         while (resultSet.next()) {
             RentEntity rentEntity = new RentEntity();
             rentEntity.setId(resultSet.getInt("id"));
-            // Set other properties of rentEntity based on column names
+            rentEntity.setFromDate(resultSet.getDate("from_date"));
+            rentEntity.setToDate(resultSet.getDate("to_date"));
+            rentEntity.setTotal(resultSet.getDouble("total"));
+            rentEntity.setIsReturn(resultSet.getBoolean("is_return"));
+            rentEntity.setBalance(resultSet.getDouble("balance"));
+            rentEntity.setRefundableDeposit(resultSet.getDouble("refundable_deposit"));
+            rentEntity.setAdvancedPayment(resultSet.getDouble("advanced_payment"));
+            rentEntity.setPerDayRent(resultSet.getDouble("per_day_rent"));
+            rentEntity.setCarId(resultSet.getInt("car_id"));
+            rentEntity.setCustomerId(resultSet.getInt("customer_id"));
+
             rentalHistory.add(rentEntity);
         }
+
         return rentalHistory;
     }
 
@@ -90,17 +97,27 @@ public class RentDaoImpl implements RentDao {
     }
 
     @Override
-    public ArrayList<CustomerDto> getAllCustomers() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public RentEntity get(int rentId) throws Exception {
+        ResultSet rst = CrudUtil.executeQuery("SELECT * FROM rent WHERE id = ?", rentId);
+
+        while (rst.next()) {
+            RentEntity rentEntity = new RentEntity(
+                    rst.getInt("id"),
+                    rst.getString("from_date"),
+                    rst.getDate("to_date"),
+                    rst.getDouble("total"),
+                    rst.getBoolean("is_return"),
+                    rst.getDouble("balance"),
+                    rst.getDouble("refundable_deposit"),
+                    rst.getDouble("advanced_payment"),
+                    rst.getDouble("per_day_rent"),
+                    rst.getInt("car_id"),
+                    rst.getInt("customer_id")
+            );
+
+            return rentEntity;
+        }
+        return null;
     }
 
-    @Override
-    public ArrayList<CarDto> getAllCars() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public RentEntity get(int rentId) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }

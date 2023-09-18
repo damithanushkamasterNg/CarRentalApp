@@ -3,9 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package car.rental.system.service.custom;
-
-import car.rental.system.dto.CarDto;
-import car.rental.system.dto.CustomerDto;
 import car.rental.system.dto.RentDto;
 import car.rental.system.service.SuperService;
 import java.util.ArrayList;
@@ -20,10 +17,8 @@ public interface RentService extends SuperService {
 
     String returnCar(int rentId, double finalBalance) throws Exception;
 
-    ArrayList<RentDto> getRentalHistory(int customerId) throws Exception;
+    ArrayList<RentDto> getRentalHistory(int id) throws Exception;
 
-    ArrayList<CustomerDto> getAllCustomers() throws Exception;
-
-    ArrayList<CarDto> getAllCars() throws Exception;
+    public RentDto getRentDetail(int id) throws Exception;
 
 }

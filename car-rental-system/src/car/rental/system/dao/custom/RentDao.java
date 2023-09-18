@@ -5,8 +5,6 @@
 package car.rental.system.dao.custom;
 
 import car.rental.system.dao.CrudDao;
-import car.rental.system.dto.CarDto;
-import car.rental.system.dto.CustomerDto;
 import car.rental.system.entity.RentEntity;
 
 /**
@@ -17,11 +15,7 @@ import java.util.ArrayList;
 
 public interface RentDao extends CrudDao<RentEntity, Integer> {
 
-    ArrayList<RentEntity> getRentalHistory(int customerId) throws Exception;
+    ArrayList<RentEntity> getRentalHistory(int id) throws Exception;
 
-    ArrayList<CustomerDto> getAllCustomers() throws Exception;
-
-    ArrayList<CarDto> getAllCars() throws Exception;
-
-    public RentEntity get(int rentId);
+    public RentEntity get(int rentId)throws Exception;
 }

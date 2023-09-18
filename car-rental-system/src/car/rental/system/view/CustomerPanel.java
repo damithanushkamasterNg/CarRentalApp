@@ -174,6 +174,15 @@ public class CustomerPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        customerTable.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                customerTableAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         customerTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 customerTableMouseClicked(evt);
@@ -250,6 +259,10 @@ public class CustomerPanel extends javax.swing.JPanel {
     private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
         searchCustomer();
     }//GEN-LAST:event_customerTableMouseClicked
+
+    private void customerTableAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_customerTableAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerTableAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

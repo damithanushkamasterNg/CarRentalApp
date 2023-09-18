@@ -7,7 +7,6 @@ package car.rental.system.service.custom.impl;
 import car.rental.system.dao.DaoFactory;
 import car.rental.system.dao.custom.RentDao;
 import car.rental.system.dto.CarDto;
-import car.rental.system.dto.CustomerDto;
 import car.rental.system.dto.RentDto;
 import car.rental.system.entity.RentEntity;
 import car.rental.system.service.custom.RentService;
@@ -60,15 +59,26 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public ArrayList<RentDto> getRentalHistory(int customerId) throws Exception {
+    public ArrayList<RentDto> getRentalHistory(int id) throws Exception {
         ArrayList<RentDto> rentalHistory = new ArrayList<>();
         try {
             // Fetch rental history for the specified customer from rentDao
-            ArrayList<RentEntity> rentalEntities = rentDao.getRentalHistory(customerId);
+            ArrayList<RentEntity> rentalEntities = rentDao.getRentalHistory(id);
             // Convert RentEntity objects to RentDto objects and populate rentalHistory
             for (RentEntity entity : rentalEntities) {
                 RentDto rentDto = new RentDto();
-                // Map RentEntity properties to RentDto properties
+                rentDto.setId(entity.getId());
+                rentDto.setFromDate(entity.getFromDate());
+                rentDto.setToDate(entity.getToDate());
+                rentDto.setTotal(entity.getTotal());
+                rentDto.setIsReturn(entity.isIsReturn());
+                rentDto.setBalance(entity.getBalance());
+                rentDto.setRefundableDeposit(entity.getRefundableDeposit());
+                rentDto.setAdvancedPayment(entity.getAdvancedPayment());
+                rentDto.setPerDayRent(entity.getPerDayRent());
+                rentDto.setCarId(entity.getCarId());
+                rentDto.setCustomerId(entity.getCustomerId());
+
                 rentalHistory.add(rentDto);
             }
         } catch (Exception e) {
@@ -78,26 +88,26 @@ public class RentServiceImpl implements RentService {
     }
 
     @Override
-    public ArrayList<CustomerDto> getAllCustomers() throws Exception {
-        ArrayList<CustomerDto> customers = new ArrayList<>();
-        try {
-            // Fetch all customers from the database using rentDao or a dedicated CustomerDao
-            // Convert CustomerEntity objects to CustomerDto objects and populate 'customers'
-        } catch (Exception e) {
-            // Handle exceptions and return an empty list or throw an exception
-        }
-        return customers;
-    }
+public RentDto getRentDetail(int id) throws Exception {
+    RentEntity entity = rentDao.get(id);
 
-    @Override
-    public ArrayList<CarDto> getAllCars() throws Exception {
-        ArrayList<CarDto> cars = new ArrayList<>();
-        try {
-            // Fetch all cars from the database using rentDao or a dedicated CarDao
-            // Convert CarEntity objects to CarDto objects and populate 'cars'
-        } catch (Exception e) {
-            // Handle exceptions and return an empty list or throw an exception
-        }
-        return cars;
-    }
+    // Create a new RentDto using the RentEntity properties
+    RentDto rentDto = new RentDto(
+        entity.getId(),
+        entity.getFromDate(), // Assuming getFromDate() returns a Date
+        entity.getToDate(), // Assuming getToDate() returns a Date
+        entity.getTotal(),
+        entity.isIsReturn(),
+        entity.getBalance(),
+        entity.getRefundableDeposit(),
+        entity.getAdvancedPayment(),
+        entity.getPerDayRent(),
+        entity.getCarId(),
+        entity.getCustomerId()
+    );
+
+    return rentDto;
+}
+
+
 }
