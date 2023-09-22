@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package car.rental.system;
-
-import car.rental.system.view.LayoutView;
 import car.rental.system.view.LoginForm;
 
 /**
