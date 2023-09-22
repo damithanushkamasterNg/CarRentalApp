@@ -22,5 +22,4 @@ public interface CrudDao<T, ID> extends SuperDao {
     T get(String nic) throws Exception;
 
     ArrayList<T> getAll() throws Exception;
-
 }

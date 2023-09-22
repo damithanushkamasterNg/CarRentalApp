@@ -3,6 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package car.rental.system.view;
+
+import car.rental.system.controller.LoginController;
+import car.rental.system.service.ServiceFactory;
+import car.rental.system.service.custom.LoginService;
 import javax.swing.JOptionPane;
 
 /**
@@ -11,11 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class LoginForm extends javax.swing.JFrame {
 
+    public LoginController loginController;
+
     /**
      * Creates new form LoginForm
      */
     public LoginForm() {
+        loginController = new LoginController();
         initComponents();
+        
     }
 
     /**
@@ -136,29 +144,29 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField userName;
     // End of variables declaration//GEN-END:variables
 
+// ...
     public void login() {
-
-        // Assuming you have a JPasswordField instance, you can access its text using getPassword() method.
-        char[] passwordChars = password.getPassword();
-
-        // Convert the char array to a String
-        String enteredPassword = new String(passwordChars);
-        // Get the entered username and password
         String enteredUsername = userName.getText();
+        char[] passwordChars = password.getPassword();
+        String enteredPassword = new String(passwordChars);
 
-        // Define the valid username and password
-        String validUsername = "admin";
-        String validPassword = "123";
+        try {
+            // Use the LoginService to authenticate the user
+            boolean isAuthenticated = loginController.authenticateUser(enteredUsername, enteredPassword);
 
-        // Check if the entered username and password are valid
-        if (enteredUsername.equals(validUsername) && enteredPassword.equals(validPassword)) {
-            // Successful login
-            JOptionPane.showMessageDialog(null, "Login Successful!");
-            this.setVisible(false);
-            new LayoutView().setVisible(true);
-        } else {
-            // Invalid login
-            JOptionPane.showMessageDialog(null, "Invalid username or password. Please try again.");
+            if (isAuthenticated) {
+                // Successful login
+                JOptionPane.showMessageDialog(null, "Login Successful!");
+                this.setVisible(false);
+                new LayoutView().setVisible(true);
+            } else {
+                // Invalid login
+                JOptionPane.showMessageDialog(null, "Invalid username or password. Please try again.");
+            }
+        } catch (Exception e) {
+            // Handle exceptions (e.g., database errors) here
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "An error occurred during login. Please try again later.");
         }
     }
 

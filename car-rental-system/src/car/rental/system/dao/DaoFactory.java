@@ -3,6 +3,7 @@ import car.rental.system.dao.custom.impl.CarDaoImpl;
 import car.rental.system.dao.custom.impl.CategoryDaoImpl;
 import car.rental.system.dao.custom.impl.CustomerDaoImpl;
 import car.rental.system.dao.custom.impl.RentDaoImpl;
+import car.rental.system.dao.custom.impl.UserDaoImpl;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -44,12 +45,14 @@ public class DaoFactory {
                 return new RentDaoImpl();
             case CATEGORY:
                 return new CategoryDaoImpl();
+                case USER:
+                return  new UserDaoImpl();
             default:
                 return null;
         }
     }
 
     public enum DaoTypes {
-        CUSTOMER, CAR, RENT, CATEGORY
+        CUSTOMER, CAR, RENT, CATEGORY, USER
     }
 }
